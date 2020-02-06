@@ -10,6 +10,7 @@ RUN pip install -r requirements.txt
 
 COPY src /usr/src/app/
 COPY templates /usr/src/templates
+COPY css /usr/src/css
 
 EXPOSE 5000
 
