@@ -5,7 +5,7 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="/css/bootstrap.css" />
-        <title>{{ name }}</title>
+        <title>{% block title %}{% endblock %} - TORTUE</title>
     </head>
 <body> 
 <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
@@ -30,3 +30,6 @@
 </ul>
 </div>
 </nav>
+{% block content %}{% endblock %}
+</body>
+</html>

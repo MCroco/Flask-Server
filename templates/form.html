@@ -1,5 +1,9 @@
-{% include 'header.html' %}
-<h1>Salut {{ name }}</h1>
+{% extends 'base.html' %}
+
+{% block title %}Formulaire{% endblock %}
+
+{% block content %}
+<h1>Salut {{ model.name }}</h1>
 <!-- Form which will send a POST request to the current URL -->
 <form method="post">
     <label>Name:</label>
@@ -11,10 +15,10 @@
     <button>Save</button>
 </form>
 
-<h2>Firme: {{ firm }}</h2>
-<h2>Montant: {{ amount }}</h2>
-<h2>Total: {{ tot }}</h2>
-<h3>TVA:    {% if ok %}
-yay
-{% endif %}</h3>
-{% include 'footer.html' %}
+{% if model.show %}
+<h2>Firme: {{ model.firm }}</h2>
+<h2>Montant: {{ model.amount }}</h2>
+<h2>Total: {{ model.tot }}</h2>
+{% endif %}
+
+{% endblock %}

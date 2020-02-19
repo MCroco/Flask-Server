@@ -11,11 +11,19 @@ env = Environment(
 )
 
 
+class FormModel:
+    def __init__(self, name=None, firm=None, amount=None, total=None, show=True):
+        self.name = name
+        self.firm = firm
+        self.amount = amount
+        self.total = total
+        self.show = show
+
+
 @app.route("/")
 def index():
-    template = env.get_template('babar.html')
-    # template = read_template("babar.html")
-    tva = 5 + 5  # sql
+    template = env.get_template('index.html')
+    tva = 5 + 5
     return template.render(name=str(tva))
 
 
@@ -27,21 +35,16 @@ def boostrap():
 @app.route("/form.html", methods=["GET", "POST"])
 def form():
     if request.method == "POST":
-        # name = request.form['name']
         name = request.form["name"]
         firm = request.form["firm"]
         amount = request.form["amount"]
         amount = float(amount)
         tva = amount * 0.21
         tot = amount + tva
-        ok = True
+        model = FormModel(name, firm, amount, tot)
     else:
-        name = "toto"
-        firm = ""
-        tot = ""
-        tva = ""
-        amount = ""
-        ok = False
+        model = FormModel(name='test', show=False)
 
     template = env.get_template('form.html')
-    return template.render(name=name, firm=firm, amount=amount, tva=tva, tot=tot, ok=ok)
+    # return template.render(name=name, firm=firm, amount=amount, tva=tva, tot=tot, ok=ok)
+    return template.render(model=model)
