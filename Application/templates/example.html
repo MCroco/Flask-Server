@@ -1,0 +1,17 @@
+{% extends 'home.html' %}
+
+{% block title %} Example {% endblock %}
+
+{% block content %}
+	<div class='container'>
+		<h1>{{title}}</h1>
+		<p>{{description}}</p>
+	</div>
+	<div class='container'>
+		{% for formModel in forms %}
+			<ul id=formsModel.name>
+				<li>Name: {{ formModel.name }}</li>
+			</ul>
+		{% endfor %}
+	</div>
+{% endblock %}
