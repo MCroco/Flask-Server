@@ -1,8 +1,25 @@
-version: '3.7'
+version: '3'
 
 services:
   web:
     build: .
+    container_name: ${APP_NAME}_web
     ports:
-      - 5000:5000
-    container_name: devweb-server
+      - ${FLASK_PORT}:5000
+    command: >
+      sh -c "/app/wait_for_db.sh --host=${APP_NAME}_database --port=${DATABASE_PORT} && 
+      python /app/wsgi.py"
+  database:
+    image: mariadb:${DATABASE_IMAGE_TAG}
+    container_name: ${APP_NAME}_database
+    environment: 
+      - PUID=1000
+      - PGID=1000
+      - MYSQL_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}
+      - TZ=${DATABASE_TZ}
+      - MYSQL_DATABASE=${DATABASE_NAME}
+      - MYSQL_USER=${DATABASE_USER}
+      - MYSQL_PASSWORD=${DATABASE_PASSWORD}
+    ports:
+      - "${DATABASE_PORT}:3306"
+    restart: unless-stopped
