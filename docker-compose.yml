@@ -9,6 +9,7 @@ services:
     command: >
       sh -c "/app/wait_for_db.sh --host=${APP_NAME}_database --port=${DATABASE_PORT} && 
       python /app/wsgi.py"
+      
   database:
     image: mariadb:${DATABASE_IMAGE_TAG}
     container_name: ${APP_NAME}_database
