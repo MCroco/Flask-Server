@@ -6,6 +6,7 @@ For this application to work, you need the following software installed on your 
 
 - Docker
 - docker-compose
+- Make
 
 ## Setup the services
 
