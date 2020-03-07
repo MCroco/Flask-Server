@@ -6,8 +6,11 @@ services:
     container_name: ${APP_NAME}_web
     ports:
       - ${FLASK_PORT}:5000
+    volumes: 
+      - '.:/app'
     command: >
-      sh -c "/app/wait_for_db.sh --host=${APP_NAME}_database --port=${DATABASE_PORT} && 
+      sh -c "chmod +x /app/wait_for_db.sh &&
+      /app/wait_for_db.sh --host=${APP_NAME}_database --port=${DATABASE_PORT} && 
       python /app/wsgi.py"
       
   database:
