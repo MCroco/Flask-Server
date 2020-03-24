@@ -16,9 +16,7 @@ services:
   database:
     image: mariadb:${DATABASE_IMAGE_TAG}
     container_name: ${APP_NAME}_database
-    environment: 
-      - PUID=1000
-      - PGID=1000
+    environment:
       - MYSQL_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}
       - TZ=${DATABASE_TZ}
       - MYSQL_DATABASE=${DATABASE_NAME}
