@@ -1,0 +1,121 @@
+if __name__ == '__main__': from SHIDev.session import loginRequired
+from SHI.web import webPage
+from yattag import Doc
+import SHI.local_db as db
+from SHI.tools import sizingImage
+import parametres
+import menu_moderateur
+from vues.personne import PersonPageView
+from datetime import datetime,date
+
+
+programme = {'Finances': ['inge', 'sciences éco', 'plombier'], 
+             'Sciences': ['math', 'physique', 'trigo']
+            }
+
+
+def tableau_de_bord_page(doc, tag, text):
+    
+
+    with tag('div',klass='wrapper'):
+            doc, tag, text = menu_moderateur.sidebar(doc, tag, text)
+            with tag('div', id='content'):
+                
+                with tag('div'):
+                    with tag('a', href='ajouterSujetProf.py'):
+                        text('Ajouter un nouveau sujet')
+                
+                # with tag('h3', onclick="switch_table_etus_sujets()"):
+                    # text('Liste des étudiants qui ont choisi un de vos sujets +')
+                # with tag('div', id='div_chercher_nom_etu'):
+                    """Recherche tab étudiants-sujet"""
+                    # with tag('input', type='text', id='chercher_nom_etu', onkeyup='recherche_etudiant()', placeholder='Chercher par nom', title='introduire un nom'):pass
+
+                    
+                with tag('h3', onclick='switch_table_profs_sujet()'):
+                    text('Sujets proposés par les professeurs + ')
+                with tag('div', id='div_profs_sujet'):
+                    with tag('table', id='table_sujets_profs', klass="table table-striped table-bordered table-sm top-buffer", cellspacing="0", width="100%"):
+                            with tag('thead'):
+                                with tag('tr'):
+                                
+                                    with tag('th', cope="col", klass='text-center'):
+                                        text('Nom')
+                                    with tag('th', scope="col", klass='text-center'):
+                                        text('Prénom')
+                                    with tag('th', cope="col", klass='text-center'):
+                                        text('Nombre sujets')
+                                    with tag('th', scope="col", klass='text-center'):
+                                        text('Nombre étudiants qui ont choisi ces sujets')
+                                    with tag('th', scope="col", klass='text-center text-center'):
+                                        text('plus de détails')
+                                   
+                                        
+                            with tag('tbody'):
+                                """A FAIRE UNE BOUCLE POUR LES PROFS"""
+
+                                with tag('tr'):
+                                    
+                                    with tag('td', scope="col", klass='text-center'):
+                                        text('Anhony')
+                                    with tag('td', scope="col", klass='text-center'):
+                                        text('Benjamiqsdfqsfn')
+                                    with tag('td', scope="col", klass='text-center'):
+                                        text('3' + ' sujets')
+                                    with tag('td', scope="col", klass='text-center'):
+                                        text('3' + ' étudiants')
+                                    with tag('td', scope="col", klass='text-center'):
+                                        with tag('img', src='./dist/icons_Constantin/eye.png', id="myBtn"):pass
+                                        
+                            """ MODAL """
+                            with tag('div', id='myModal', klass='modal'):
+
+                                
+                                with tag('div', klass='modal-content d-flex'):
+                                    with tag('span', klass='close'):
+                                        text("Fermer")
+                                    with tag('h3'):
+                                        text('Professeur : ' + 'Nom du prof')
+
+                                        with tag('table', klass="table table-striped table-bordered "):
+                                            with tag('thead'):
+                                                with tag('tr', klass='text-center d-flex'):
+                                                    with tag('th', klass="col-1 text-center"):
+                                                        text('')
+                                                    with tag('th', klass="col-sm-7 text-center"):
+                                                        text('Titre')
+                                                    with tag('th', klass="col-sm-2 text-center"):
+                                                        text('Programme')
+                                                    with tag('th', klass="col-sm-2 text-center"):
+                                                        text('Filière')
+                                      
+                                                        
+                                            with tag('tbody'):
+                                                """A FAIRE UNE BOUCLE POUR LES sujets"""
+                                                with tag('tr', id='sujet'+'1', klass="d-flex"):
+                                                    with tag('td', klass="col-1 text-center"):
+                                                        with tag('input', type='checkbox', value='0'):pass
+                                                        with tag('img', src='./dist/icons_Constantin/pencil.png', id="myBtn"):pass
+                                                        with tag('img', src='./dist/icons_Constantin/bin.png'):pass
+                                                    with tag('td', klass="col-sm-7 text-center"):
+                                                        with tag('textarea', klass='disable_text ', placeholder='dfqsfqssqdfqsfqsfqfqsffdfqsdfsfd'):pass
+                                                    with tag('td', klass="col-sm-2 text-center"):
+                                                        with tag('textarea', klass='disable_text ', placeholder='dfqsfqssqdfqsfqsfqfqsffdfqsdfsfd'):pass
+                                                    with tag('td', klass="col-sm-2 text-center"):
+                                                        with tag('textarea', klass='disable_text ', placeholder='dfqsfqssqdfqsfqsfqfqsffdfqsdfsfd'):pass
+                                                
+                                        
+                                
+                                    
+                                    
+    with tag('script', src="./dist/js/jquery_page_sujets_profs.js"):pass
+    with tag('script', src="./dist/js/js_page_sujets_profs.js"):pass
+    with tag('script', src="./dist/js/datatables.min.js"):pass
+    with tag('stylesheet', src='./dist/css/modal.css'):pass
+
+    return doc, tag, text
+
+
+
+if __name__ == '__main__':
+    page()
